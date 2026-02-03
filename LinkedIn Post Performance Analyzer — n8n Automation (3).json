@@ -1,0 +1,836 @@
+{
+  "name": "LinkedIn Post Performance Analyzer — n8n Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Post Analyzer",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Post Title"
+            },
+            {
+              "fieldLabel": "Post Time"
+            },
+            {
+              "fieldLabel": "Impressions after 24 hours",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Post Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Text"
+                  },
+                  {
+                    "option": "Image"
+                  },
+                  {
+                    "option": "Caroseul"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Likes",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Comments",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Reposts",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Saves",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Post Text",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Did you posted today?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -448,
+        -272
+      ],
+      "id": "5c02c575-7f36-40e1-b679-2b9917389e38",
+      "name": "Data Reciver",
+      "webhookId": "43b98fcd-95be-4533-8851-67aff485782d"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "14Tp0MIHhbmKSJi44f2IHqxf5vWT1U5hK5w0pKh3NFsY",
+          "mode": "list",
+          "cachedResultName": "Post Analytics",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/14Tp0MIHhbmKSJi44f2IHqxf5vWT1U5hK5w0pKh3NFsY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/14Tp0MIHhbmKSJi44f2IHqxf5vWT1U5hK5w0pKh3NFsY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Post Title": "={{ $('Data Reciver').item.json['Post Title'] }}",
+            "Post Time": "={{ $('Data Reciver').item.json['Post Time'] }}",
+            "Impressions after 24 hours": "={{ $('Data Reciver').item.json['Impressions after 24 hours'] }}",
+            "Post Type": "={{ $('Data Reciver').item.json['Post Type'] }}",
+            "Likes": "={{ $('Data Reciver').item.json.Likes }}",
+            "Comments": "={{ $('Data Reciver').item.json.Comments }}",
+            "Saves": "={{ $('Data Reciver').item.json.Saves }}",
+            "Reposts": "={{ $('Data Reciver').item.json.Reposts }}",
+            "Post Length": "={{ $('Merge').item.json.length }}",
+            "Post Criteria": "={{ $json.PostCriteria }}",
+            "Engagement Rate": "={{ $json.engagementRate }}"
+          },
+          "matchingColumns": [
+            "Post Title"
+          ],
+          "schema": [
+            {
+              "id": "Post Title",
+              "displayName": "Post Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Post Time",
+              "displayName": "Post Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Impressions after 24 hours",
+              "displayName": "Impressions after 24 hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Post Type",
+              "displayName": "Post Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Likes",
+              "displayName": "Likes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Comments",
+              "displayName": "Comments",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Reposts",
+              "displayName": "Reposts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Saves",
+              "displayName": "Saves",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Post Length",
+              "displayName": "Post Length",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Post Criteria",
+              "displayName": "Post Criteria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Engagement Rate",
+              "displayName": "Engagement Rate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1552,
+        -192
+      ],
+      "id": "56938df2-f752-44b6-92ac-3ec812ba3732",
+      "name": "Adding Data",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "axiIrfPQ6X7lKuvD",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eea53bad-543a-4a23-88a2-3c43c4651a60",
+              "name": "lengthOfPost",
+              "value": "={{ $json['Post Text'].length }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        -80
+      ],
+      "id": "352dfb29-950c-4c77-8669-5be0a9a195ce",
+      "name": "Length of Post"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.lengthOfPost }}",
+                    "rightValue": 1200,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gte"
+                    },
+                    "id": "5f532713-41b3-4c7b-993e-a85cf99aa68d"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Long Form"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "77cf3681-f920-4fa8-9a44-a01fb179394b",
+                    "leftValue": "={{ $json.lengthOfPost }}",
+                    "rightValue": 1000,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Mediium Form"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "43011a45-aca4-48fc-ad39-602519b3c41d",
+                    "leftValue": "={{ $json.lengthOfPost }}",
+                    "rightValue": 800,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Short Form"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        -96
+      ],
+      "id": "5a734e90-ca1b-4d97-b439-825906b5ae32",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eea53bad-543a-4a23-88a2-3c43c4651a60",
+              "name": "length",
+              "value": "=Long",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        -288
+      ],
+      "id": "b4c394d9-173d-4710-9ce6-27ff92663b89",
+      "name": "Long Posts"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eea53bad-543a-4a23-88a2-3c43c4651a60",
+              "name": "length",
+              "value": "=Medium",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        -96
+      ],
+      "id": "91d3ba3d-3272-4dd5-9a81-6f5f32412900",
+      "name": "Medium Posts"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eea53bad-543a-4a23-88a2-3c43c4651a60",
+              "name": "length",
+              "value": "=Short",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        96
+      ],
+      "id": "ccce9901-bcf5-4267-b876-bb2ba643b5a4",
+      "name": "Short Posts"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        448,
+        -112
+      ],
+      "id": "4e552db4-a4e0-40e1-b8cb-f51a5987e2ad",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8270e6f3-ae57-4aeb-816a-907ad5cfa897",
+              "leftValue": "={{ $json['Score Calculator'] }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        880,
+        -96
+      ],
+      "id": "94f51bbc-0815-4207-bf16-dace7d1da693",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1328,
+        -208
+      ],
+      "id": "bab517cc-568f-473c-a75d-c2faf7ebab3c",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "25789eea-9bdf-4526-a8f5-ad28637c35a5",
+              "name": "PostCriteria",
+              "value": "Successful",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1104,
+        -256
+      ],
+      "id": "88244ccb-f730-49dc-950c-1194bcb0f70d",
+      "name": "Successful"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "25789eea-9bdf-4526-a8f5-ad28637c35a5",
+              "name": "PostCriteria",
+              "value": "Unsuccessful",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1104,
+        16
+      ],
+      "id": "833102ac-eed0-4e4c-bdc5-2b45deaff03d",
+      "name": "Unsuccessful"
+    },
+    {
+      "parameters": {
+        "sendTo": "htfsh12345@gmail.com",
+        "subject": "Post Performance Update",
+        "message": "=Hi hassan,\n\nYour post with title {{ $json['Post Title'] }} got {{ $json['Impressions after 24 hours'] }} after 24 hours!\n\nEngagemnts:\nLikes: {{ $json.Likes }}\nSaves: {{ $json.Saves }}\nReposts: {{ $json.Reposts }}\nComments: {{ $json.Comments }}\n\nThis post was {{ $('Merge1').item.json.PostCriteria }}!\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1776,
+        -192
+      ],
+      "id": "b05364ac-289b-4311-8792-78ad5632924a",
+      "name": "Send a message",
+      "webhookId": "12311060-cf9f-4a22-8499-39fd3f99ec4b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Y4UbBbihbzYRYzsc",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4365b5e1-c44f-4549-9b09-0f97c844b1a6",
+              "name": "engagementRate",
+              "value": "={{ ($json.Likes + $json.Comments + $json.Reposts + $json.Saves) / $json['Impressions after 24 hours'] * 100}}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        -544
+      ],
+      "id": "e7278486-df67-4938-875e-cc0fe9b84e34",
+      "name": "Engagement Rate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "383f37d2-37de-4a06-8eb5-634ebbe72eb7",
+              "name": "Score Calculator",
+              "value": "={{ \n  Math.min((($('Data Reciver').item.json['Impressions after 24 hours'] / 5000) * 40), 40) + \n  Math.min((($('Data Reciver').item.json[\"Comments\"] / 20) * 30), 30) + \n  Math.min((($('Data Reciver').item.json[\"Saves\"] / 20) * 20), 20) + \n  Math.min((($('Data Reciver').item.json[\"Reposts\"] / 10) * 10), 10) \n}}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        -112
+      ],
+      "id": "ce4e529a-64b1-4a88-8d25-f8da6fd52f78",
+      "name": "Score Calculator"
+    }
+  ],
+  "pinData": {
+    "Data Reciver": [
+      {
+        "json": {
+          "Post Title": "Getting Award",
+          "Post Time": "2 pm",
+          "Impressions after 24 hours": 1000,
+          "Post Type": "Image",
+          "Likes": 3,
+          "Comments": 3,
+          "Reposts": 1,
+          "Saves": 0,
+          "Post Text": "Some wins come late — but they hit deeper.\r\n\r\nSeven months ago, my result came out.\r\nI didn’t even know an award was attached to it.\r\n\r\nTwo days ago, I found out.\r\nToday, I stood on stage and received it.\r\n\r\nMashallah, moments like these remind you why patience matters.\r\n\r\nIn 9th class, I missed an academic award by just 2 marks.\r\nI scored 493/550.\r\nThe student who received it had 495/550.\r\n\r\nI wasn’t in the top 10.\r\nAnd many people quietly decided: “He can’t do it.”\r\n\r\nI didn’t explain myself.\r\nI worked.\r\n\r\nIn 10th class, I stayed consistent, focused on improvement, and trusted the process.\r\n\r\nThe result: \r\n• 526/550 marks\r\n• 2nd position in the entire college\r\n• Recognition among military college students as well\r\n\r\nStanding on that stage today — in front of everyone who once doubted me — was a feeling I can’t fully express.\r\n\r\nNow, the goal is clear.\r\n\r\nI’m working with the same mindset to achieve 1st position in HSSC-I and HSSC-II, InshaAllah.\r\n\r\nBecause results don’t always show up immediately.\r\nSometimes they arrive quietly — and then reward you loudly.\r\n\r\nConsistency works. Always.",
+          "submittedAt": "2026-02-02T12:13:04.797-05:00",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Adding Data": [
+      {
+        "json": {
+          "Post Title": "Getting Award",
+          "Post Time": "2 pm",
+          "Impressions after 24 hours": 1000,
+          "Post Type": "Image",
+          "Likes": 14,
+          "Comments": 3,
+          "Saves": 0,
+          "Reposts": 1,
+          "Post Length": "Long "
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Data Reciver": {
+      "main": [
+        [
+          {
+            "node": "Length of Post",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Engagement Rate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Length of Post": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Long Posts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Medium Posts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Short Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Long Posts": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Medium Posts": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Short Posts": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Adding Data": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Score Calculator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Successful",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unsuccessful",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Successful": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unsuccessful": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Adding Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Engagement Rate": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Score Calculator": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "eaff6bf4-05ac-41e2-af09-29df8bde2dd1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2b0018f9f41ea05223ae0d46c115cfdb817d7c2b5112bf64a704afe95fd52f7d"
+  },
+  "id": "L8ZrXL-vKRAdoJ4wvb0ft",
+  "tags": []
+}
